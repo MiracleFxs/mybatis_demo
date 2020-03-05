@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须唯一 -->
+<mapper namespace="dao.StudentDao">
+<resultMap type="entity.Student" id="baseResultMap">
+	<id column="SID" property="sid" jdbcType="INTEGER"/>
+	<result column="SNAME" property="sname" jdbcType="VARCHAR"/>
+	<result column="SAGE" property="sage" jdbcType="INTEGER"/>
+</resultMap>
+
+
+	<!-- 根据id查询单个Student对象 -->
+    <select id="selectStudentById" parameterType="int" resultMap="baseResultMap">
+    <!-- 如果实体类属性名与表中字段一致则写* -->
+        select SID,SNAME,SAGE from student where sid = #{sid}
+    </select>
+    
+    <!-- 查询学生列表 -->
+     <select id="selectStudentList"  resultMap="baseResultMap">
+    <!-- 如果实体类属性名与表中字段一致则写* -->
+        select * from student
+    </select>
+</mapper>
